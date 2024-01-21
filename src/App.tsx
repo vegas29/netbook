@@ -1,8 +1,10 @@
+import { AppRouter } from "./router/AppRouter"
+
 function App() {
 
   return (
     <>
-      <p className="flex justify-center items-center h-screen text-blue-500"> Netbook </p>
+      <AppRouter/>
     </>
   )
 }
