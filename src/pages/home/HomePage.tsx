@@ -1,5 +1,10 @@
+import { Navbar } from "../../components/Navbar";
+import { Background } from "../../layouts/Background";
+
 export const HomePage = () => {
     return (
-        <div>HomePage</div>
+        <Background>
+            <Navbar />
+        </Background>
     )
 }
