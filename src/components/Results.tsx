@@ -23,9 +23,17 @@ export const Results = ({q, dataLength}) => {
           </div>
         </div>
         : (dataLength === 0)
-        && <div aria-label="alert-danger" className="bg-red-600 text-white text-center text-2xl font-bold shadow-lg rounded-lg w-full md:w-5/12 mx-auto py-10 mt-5">
-          There are no result for {q}
-        </div>
+        && 
+         (
+          <div className="mt-10">
+            <div className="bg-[#9385bc] w-fit px-4 py-3 rounded-full mx-auto">
+              <FontAwesomeIcon className="" icon={faShuttleSpace} color="#675B8C" rotation={180} flip="vertical" bounce  />
+            </div>
+            <div className=" text-gray-400 text-center text-2xl font-bold shadow-lg rounded-lg w-full md:w-5/12 mx-auto pb-10 mt-5">
+              There are no result for {q}
+            </div>
+          </div>
+         )
       }
     </>
   )
