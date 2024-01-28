@@ -1,12 +1,13 @@
 
-import { useMemo } from "react";
+// import { useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import queryString from 'query-string';
 import { useForm } from "../hooks/";
-import { getBooksByName } from '../helpers/';
+// import { getBooksByName } from '../helpers/';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Results } from "./Results";
+import { ItemsList } from "./ItemsList";
 
 export const InputSearch = () => {
 
@@ -19,8 +20,90 @@ export const InputSearch = () => {
         searchQuery: q,
     });
 
-    const booksFiltered = useMemo(()=>getBooksByName(q), [q]);   
-    
+    const booksFiltered = [
+        {
+          "isbn": "123",
+          "book_title": "Cien años de soledad",
+          "book_author": "Gabriel Garcia Marquez",
+          "year_publication": 2014,
+          "publisher": "Harper Collins Español",
+          "url_s": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
+          "url_m": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
+          "url_l": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg"
+        },
+        {
+            "isbn": "123",
+            "book_title": "Cien años de soledad",
+            "book_author": "Gabriel Garcia Marquez",
+            "year_publication": 2014,
+            "publisher": "Harper Collins Español",
+            "url_s": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
+            "url_m": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
+            "url_l": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg"
+        },
+        {
+            "isbn": "123",
+            "book_title": "Cien años de soledad",
+            "book_author": "Gabriel Garcia Marquez",
+            "year_publication": 2014,
+            "publisher": "Harper Collins Español",
+            "url_s": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
+            "url_m": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
+            "url_l": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg"
+        },
+        {
+            "isbn": "123",
+            "book_title": "Cien años de soledad",
+            "book_author": "Gabriel Garcia Marquez",
+            "year_publication": 2014,
+            "publisher": "Harper Collins Español",
+            "url_s": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
+            "url_m": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
+            "url_l": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg"
+        },
+        {
+            "isbn": "123",
+            "book_title": "Cien años de soledad",
+            "book_author": "Gabriel Garcia Marquez",
+            "year_publication": 2014,
+            "publisher": "Harper Collins Español",
+            "url_s": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
+            "url_m": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
+            "url_l": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg"
+        },
+        {
+            "isbn": "123",
+            "book_title": "Cien años de soledad",
+            "book_author": "Gabriel Garcia Marquez",
+            "year_publication": 2014,
+            "publisher": "Harper Collins Español",
+            "url_s": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
+            "url_m": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
+            "url_l": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg"
+        },
+        {
+            "isbn": "123",
+            "book_title": "Cien años de soledad",
+            "book_author": "Gabriel Garcia Marquez",
+            "year_publication": 2014,
+            "publisher": "Harper Collins Español",
+            "url_s": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
+            "url_m": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
+            "url_l": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg"
+        },
+        {
+            "isbn": "123",
+            "book_title": "Cien años de soledad",
+            "book_author": "Gabriel Garcia Marquez",
+            "year_publication": 2014,
+            "publisher": "Harper Collins Español",
+            "url_s": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
+            "url_m": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
+            "url_l": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg"
+        }                       
+    ]
+
+    // const booksFiltered = useMemo(()=>getBooksByName(q), [q]);   
 
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -58,6 +141,8 @@ export const InputSearch = () => {
             </form>
 
             <Results q={q} dataLength={booksFiltered.length} />
+
+            <ItemsList books={booksFiltered} />
         </>
     )
 }

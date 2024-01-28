@@ -30,7 +30,7 @@ export const Results = ({q, dataLength}) => {
               <FontAwesomeIcon className="" icon={faShuttleSpace} color="#675B8C" rotation={180} flip="vertical" bounce  />
             </div>
             <div className=" text-gray-400 text-center text-2xl font-bold shadow-lg rounded-lg w-full md:w-5/12 mx-auto pb-10 mt-5">
-              There are no result for {q}
+              There are not results for {q}
             </div>
           </div>
          )
