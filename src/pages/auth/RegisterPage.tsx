@@ -1,19 +1,68 @@
-import { AuthLayout } from "../../layouts/AuthLayout";
-import { useForm } from "../../hooks/";
 import { Link } from "react-router-dom";
+import { AuthLayout } from "../../layouts/AuthLayout";
+import { useAuthStore, useForm } from "../../hooks/";
+import Swal from "sweetalert2";
 
 export const RegisterPage = () => {
 
+  const { startRegister, 
+    // errorMessage 
+  } = useAuthStore();
+
   const [formValues, handleInputChange] = useForm({
+    name: '',
+    lastname: '',
     email: '',
-    password: ''
+    password: '',
+    rpassword: ''
   })
 
-  const {email, password} = formValues;
+  const {name, lastname, email, password, rpassword} = formValues;
 
   const handleLogin = (e) =>{
     e.preventDefault();
-    console.log('submit login');
+
+    if (name.length === 0 || name === '') {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "The name is required",
+      });
+    } else if (lastname.length === 0 || lastname === '') {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "El lastname is required",
+      });
+    } else if (email.length === 0 || email === '') {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "The email is required",
+      });
+    } else if (!email.includes('@')) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "The email is not valid",
+      });
+    } else if (password.length === 0 || password === '') {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "The password is required",
+      });
+    } else if(password !== rpassword) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "The passwords are not same",
+      });
+
+      return;
+    }
+
+    startRegister({name, lastname, email, password});
   }
 
   return (
@@ -30,7 +79,33 @@ export const RegisterPage = () => {
       >
 
         <div>
-          <label className="text-white font-bold mb-3 block">Username</label>
+          <label className="text-white font-bold mb-3 block">Name</label>
+          <input
+            type="text"
+            placeholder="Type your name"
+            name="name"
+            className="bg-[#212133] rounded mb-5 h-10 p-6 w-full text-white focus:outline-none active:outline-none"
+            autoComplete="off"
+            value={name}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <div>
+          <label className="text-white font-bold mb-3 block">Lastname</label>
+          <input
+            type="text"
+            placeholder="Type your lastname"
+            name="lastname"
+            className="bg-[#212133] rounded mb-5 h-10 p-6 w-full text-white focus:outline-none active:outline-none"
+            autoComplete="off"
+            value={lastname}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <div>
+          <label className="text-white font-bold mb-3 block">Email</label>
           <input
             type="text"
             placeholder="Type your email"
@@ -59,9 +134,9 @@ export const RegisterPage = () => {
           <input
             type="password"
             placeholder="Type again your password"
-            name="password"
+            name="rpassword"
             className="bg-[#212133] rounded mb-5 h-10 p-6 w-full text-white focus:outline-none active:outline-none"
-            value={password}
+            value={rpassword}
             onChange={handleInputChange}
           />
         </div>
@@ -74,7 +149,7 @@ export const RegisterPage = () => {
         </button>
 
         <Link
-          to="/"
+          to="/login"
           className="text-white flex flex-col md:flex-row justify-center items-center"
         >
           Don't have already an account?

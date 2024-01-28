@@ -1,8 +1,16 @@
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthLayout } from "../../layouts/AuthLayout";
-import { useForm } from "../../hooks/";
-import { Link } from "react-router-dom";
+import { useAuthStore, useForm } from "../../hooks/";
+import Swal from "sweetalert2";
 
 export const LoginPage = () => {
+
+  const navigate = useNavigate();
+
+  const { startLogin, 
+    // errorMessage 
+  } = useAuthStore();
 
   const [formValues, handleInputChange] = useForm({
     email: '',
@@ -13,7 +21,37 @@ export const LoginPage = () => {
 
   const handleLogin = (e) =>{
     e.preventDefault();
+
+    if (email.length === 0 || email === '') {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "The name is required",
+      });
+    } else if (!email.includes('@')) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "The email is not valid",
+      });
+    } else if (password.length === 0 || password === '') {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "The password is required",
+      });
+    } else {
+      navigate("/");
+    }
+
+    startLogin({email, password});
   }
+
+  // useEffect(() => {
+  //   if (errorMessage !== undefined) {
+  //     Swal.fire('Error en la autenticación', errorMessage, 'error');
+  //   }
+  // }, [errorMessage]);
   
   return (
     <AuthLayout>
@@ -29,13 +67,14 @@ export const LoginPage = () => {
       >
 
         <div>
-          <label className="text-white font-bold mb-3 block">Username</label>
+          <label className="text-white font-bold mb-3 block">Email</label>
           <input
             type="text"
             placeholder="Type your email"
             name="email"
             className="bg-[#212133] rounded mb-5 h-10 p-6 w-full text-white focus:outline-none active:outline-none"
             autoComplete="off"
+            required
             value={email}
             onChange={handleInputChange}
           />
