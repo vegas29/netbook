@@ -15,7 +15,7 @@ export const LoginPage = () => {
   const [formValues, handleInputChange] = useForm({
     email: '',
     password: ''
-  })
+  });
 
   const {email, password} = formValues;
 
