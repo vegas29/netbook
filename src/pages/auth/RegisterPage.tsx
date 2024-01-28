@@ -19,9 +19,9 @@ export const RegisterPage = () => {
   return (
     <AuthLayout>
       <h2 className="text-white flex justify-center mb-14 md:text-left text-3xl md:text-5xl font-bold">Smart Library<span className="text-[#AD6BF1]">.</span></h2>
-      <h3 className="text-white mb-1 md:text-left text-2xl md:text-4xl font-bold">Login<span className="text-[#AD6BF1]">.</span></h3>
+      <h3 className="text-white mb-1 md:text-left text-2xl md:text-4xl font-bold">Register<span className="text-[#AD6BF1]">.</span></h3>
       <p className="text-white">
-        Please enter your credentials to login to your account
+        Please enter your credentials to register in smart library
       </p>
 
       <form
