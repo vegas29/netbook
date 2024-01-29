@@ -14,14 +14,15 @@ export const Results = ({q, dataLength}) => {
       {
         (q === '')
         ? 
-        <div className="mt-10">
-          <div className="bg-[#9385bc] w-fit px-4 py-3 rounded-full mx-auto">
-            <FontAwesomeIcon className="" icon={faShuttleSpace} color="#675B8C" rotation={180} flip="vertical" bounce  />
-          </div>
-          <div className=" text-gray-400 text-center text-2xl font-bold shadow-lg rounded-lg w-full md:w-5/12 mx-auto pb-10 mt-5">
-            Search for a book, this book will be displayed here
-          </div>
-        </div>
+        null
+        // <div className="mt-10">
+        //   <div className="bg-[#9385bc] w-fit px-4 py-3 rounded-full mx-auto">
+        //     <FontAwesomeIcon className="" icon={faShuttleSpace} color="#675B8C" rotation={180} flip="vertical" bounce  />
+        //   </div>
+        //   <div className=" text-gray-400 text-center text-2xl font-bold rounded-lg w-full md:w-5/12 mx-auto pb-10 mt-5">
+        //     Search for a book, this book will be displayed here
+        //   </div>
+        // </div>
         : (dataLength === 0)
         && 
          (
@@ -29,7 +30,7 @@ export const Results = ({q, dataLength}) => {
             <div className="bg-[#9385bc] w-fit px-4 py-3 rounded-full mx-auto">
               <FontAwesomeIcon className="" icon={faShuttleSpace} color="#675B8C" rotation={180} flip="vertical" bounce  />
             </div>
-            <div className=" text-gray-400 text-center text-2xl font-bold shadow-lg rounded-lg w-full md:w-5/12 mx-auto pb-10 mt-5">
+            <div className=" text-gray-400 text-center text-2xl font-bold rounded-lg w-full md:w-5/12 mx-auto pb-10 mt-5">
               There are not results for {q}
             </div>
           </div>
