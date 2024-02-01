@@ -1,16 +1,14 @@
-// import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { AuthLayout } from "../../layouts/AuthLayout";
 import { useAuthStore, useForm } from "../../hooks/";
 import Swal from "sweetalert2";
 
 export const LoginPage = () => {
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const { startLogin, 
-    // errorMessage 
-  } = useAuthStore();
+  const { startLogin, errorMessage } = useAuthStore();
 
   const [formValues, handleInputChange] = useForm({
     email: '',
@@ -22,36 +20,30 @@ export const LoginPage = () => {
   const handleLogin = (e) =>{
     e.preventDefault();
 
-    if (email.length === 0 || email === '') {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "The name is required",
-      });
-    } else if (!email.includes('@')) {
+    if([email, password].includes('')) {
+      Swal.fire('There are empty fields', 'Please, fill in all fields', 'error');
+      return;
+    }
+
+    if (!email.includes('@')) {
+      console.log(email.includes('@'), email)
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "The email is not valid",
       });
-    } else if (password.length === 0 || password === '') {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "The password is required",
-      });
-    } else {
-      navigate("/");
+
+      return;
     }
 
     startLogin({email, password});
   }
 
-  // useEffect(() => {
-  //   if (errorMessage !== undefined) {
-  //     Swal.fire('Error en la autenticación', errorMessage, 'error');
-  //   }
-  // }, [errorMessage]);
+  useEffect(() => {
+    if (errorMessage !== undefined) {
+      // Swal.fire('Error en la autenticación', errorMessage, 'error');
+    }
+  }, [errorMessage]);
   
   return (
     <AuthLayout>

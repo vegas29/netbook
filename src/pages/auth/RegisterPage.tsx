@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AuthLayout } from "../../layouts/AuthLayout";
 import { useAuthStore, useForm } from "../../hooks/";
@@ -6,9 +7,7 @@ import Swal from "sweetalert2";
 
 export const RegisterPage = () => {
 
-  const { startRegister, 
-    // errorMessage 
-  } = useAuthStore();
+  const { startRegister, errorMessage } = useAuthStore();
 
   const [formValues, handleInputChange] = useForm({
     name: '',
@@ -53,6 +52,12 @@ export const RegisterPage = () => {
 
     await startRegister({name, last_name, email, password: hashPassword});
   }
+
+  useEffect(() => {
+    if (errorMessage !== undefined) {
+      // Swal.fire('Error en la autenticación', errorMessage, 'error');
+    }
+  }, [errorMessage]);
 
   return (
     <AuthLayout>
@@ -138,7 +143,7 @@ export const RegisterPage = () => {
         </button>
 
         <Link
-          to="/login"
+          to="/"
           className="text-white flex flex-col md:flex-row justify-center items-center"
         >
           Don't have already an account?

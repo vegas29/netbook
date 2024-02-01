@@ -15,7 +15,7 @@ export const useAuthStore = () => {
             const { data } = await smartLibraryApi.post('/security/login', { email, password });
             // localStorage.setItem('token', data.token);
             // localStorage.setItem('token-init-date', new Date().getTime());
-            dispatch( onLogin({ name: data.name, uid: data.uid}) );
+            dispatch( onLogin({ name: data.name, last_name: data.last_name}) );
         } catch (error) {
             console.log({error});
             dispatch( onLogout('Credenciales incorrectas' ));
