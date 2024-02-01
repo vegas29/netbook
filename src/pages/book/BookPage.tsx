@@ -72,7 +72,7 @@ export const BookPage = () => {
                 </div>
                 <div className="relative mx-auto w-6/12 sm:w-full">
                     <FontAwesomeIcon className="absolute top-1/4 ml-5" icon={faSearch} color="#675B8C" />
-                    <h2 className="font-bold ml-12 mt-10 text-lg md:text-xl text-[#675B8C] uppercase">Books realted to your interests</h2>
+                    <h2 className="font-bold ml-12 mt-10 text-lg md:text-xl text-[#675B8C] uppercase">Recommended for you</h2>
                 </div>
                 <ItemsList books={relatedBooks}/>
                 <Footer/>

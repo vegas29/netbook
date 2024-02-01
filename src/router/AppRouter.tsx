@@ -4,7 +4,7 @@ import { LoginPage } from '../pages/auth/LoginPage';
 import { RegisterPage } from '../pages/auth/RegisterPage';
 import { Loader } from '../ui/components/Loader';
 import { HomePage } from '../pages/home/HomePage';
-// import { BookPage } from '../pages/book/BookPage';
+import { BookPage } from '../pages/book/BookPage';
 
 export const AppRouter = () => {
 
@@ -32,6 +32,7 @@ export const AppRouter = () => {
                         <>      
                             <Route path="/" element={<HomePage/>} />                  
                             <Route path="/*" element={<Navigate to="/"/>} />
+                            <Route path="/book/:bookId" element={<BookPage/>} />   
                         </>
                     )
             }

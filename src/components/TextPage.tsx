@@ -15,7 +15,7 @@ export const TextPage = ({author, date, publisher, rating}) => {
             </p>
 
             <p>
-                <span className="font-black">Publicaton date: </span>
+                <span className="font-black">Publication date: </span>
                 {date}
             </p>
 
