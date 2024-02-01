@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { AuthLayout } from "../../layouts/AuthLayout";
 import { useAuthStore, useForm } from "../../hooks/";
+import { hashStringToSHA256 } from "../../helpers/";
 import Swal from "sweetalert2";
 
 export const RegisterPage = () => {
@@ -11,48 +12,34 @@ export const RegisterPage = () => {
 
   const [formValues, handleInputChange] = useForm({
     name: '',
-    lastname: '',
+    last_name: '',
     email: '',
     password: '',
     rpassword: ''
   })
 
-  const {name, lastname, email, password, rpassword} = formValues;
+  const {name, last_name, email, password, rpassword} = formValues;
 
-  const handleLogin = (e) =>{
+  const handleLogin = async (e) =>{
     e.preventDefault();
 
-    if (name.length === 0 || name === '') {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "The name is required",
-      });
-    } else if (lastname.length === 0 || lastname === '') {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "El lastname is required",
-      });
-    } else if (email.length === 0 || email === '') {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "The email is required",
-      });
-    } else if (!email.includes('@')) {
+    if([name, last_name, email, password, rpassword].includes('')) {
+      Swal.fire('There are empty fields', 'Please, fill in all fields', 'error');
+      return;
+    }
+
+    if (!email.includes('@')) {
+      console.log(email.includes('@'), email)
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "The email is not valid",
       });
-    } else if (password.length === 0 || password === '') {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "The password is required",
-      });
-    } else if(password !== rpassword) {
+
+      return;
+    }
+    
+    if(password !== rpassword) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -62,7 +49,9 @@ export const RegisterPage = () => {
       return;
     }
 
-    startRegister({name, lastname, email, password});
+    const hashPassword = await hashStringToSHA256(password);
+
+    await startRegister({name, last_name, email, password: hashPassword});
   }
 
   return (
@@ -95,11 +84,11 @@ export const RegisterPage = () => {
           <label className="text-white font-bold mb-3 block">Lastname</label>
           <input
             type="text"
-            placeholder="Type your lastname"
-            name="lastname"
+            placeholder="Type your last_name"
+            name="last_name"
             className="bg-[#212133] rounded mb-5 h-10 p-6 w-full text-white focus:outline-none active:outline-none"
             autoComplete="off"
-            value={lastname}
+            value={last_name}
             onChange={handleInputChange}
           />
         </div>

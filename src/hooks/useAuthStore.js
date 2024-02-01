@@ -1,8 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import smartLibraryApi from "../api/smartLibraryApi";
-import { clearErrorMessage, 
-    // onChecking, 
-onLogin, onLogout } from "../store/auth/authSlice";
+import { clearErrorMessage, onChecking, onLogin, onLogout } from "../store/auth/authSlice";
 
 export const useAuthStore = () => {
 
@@ -11,7 +9,7 @@ export const useAuthStore = () => {
 
     const startLogin = async({email, password}) => {
 
-        // dispatch( onChecking() );
+        dispatch( onChecking() );
 
         try {
             const { data } = await smartLibraryApi.post('/security/login', { email, password });
@@ -28,15 +26,15 @@ export const useAuthStore = () => {
         }
     }
 
-    const startRegister = async({name, lastname, email, password}) => {
-        // dispatch( onChecking() );
-
+    const startRegister = async({name, last_name, email, password}) => {
+        dispatch( onChecking() );
         try {
-            const { data } = await smartLibraryApi.post('/user/create', { name, lastname, email, password });
-            console.log('data', data)
-            // localStorage.setItem('token', data.token);
-            // localStorage.setItem('token-init-date', new Date().getTime());
-            // dispatch( onLogin({ name: data.name, uid: data.uid}) );
+            const { status, data} = await smartLibraryApi.post('/user/create', { id: 0, type: 0, name, last_name, email, password, age: 0, active: true });
+            if ((status === 200 || status === 202) && data.message === "User created successfully") {
+                // localStorage.setItem('token', data.token);
+                // localStorage.setItem('token-init-date', new Date().getTime());
+                dispatch( onLogin({ name, last_name}));
+            }
         } catch (error) {
             console.log({error});
             dispatch( onLogout(error?.response?.data?.msg || 'Error'));
