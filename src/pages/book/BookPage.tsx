@@ -10,8 +10,12 @@ import { Background } from "../../layouts/Background";
 import { LayoutContainer } from "../../layouts/LayoutContainer";
 import { TextPage } from '../../components/TextPage';
 
+import { useAuthStore } from '../../hooks/';
+
 
 export const BookPage = () => {
+
+    const { user } = useAuthStore();
 
     const relatedBooks = [
         {
@@ -60,7 +64,7 @@ export const BookPage = () => {
     return (
         <Background>
             <LayoutContainer>
-                <Navbar />
+                <Navbar user={user} />
                 <TextTitle text="Cien años de soledad" fontSize="text-3xl md:text-5xl" width="mx-auto md:mx-0 lg:w-5/12" fontWeight="font-bold" align={'text-center lg:text-left'}/>
                 <div className="flex flex-col lg:flex-row items-center">
                     <ItemCard isPage={true} url_s={'https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg'}/>
