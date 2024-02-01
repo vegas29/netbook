@@ -40,10 +40,10 @@ export const LoginPage = () => {
   }
 
   useEffect(() => {
-    if (errorMessage !== undefined) {
-      console.log('errorMessage', errorMessage)
-      Swal.fire('Error en la autenticación', errorMessage, 'error');
-    }
+    // if (errorMessage !== undefined) {
+    //   console.log('errorMessage', errorMessage)
+    //   Swal.fire('Error en la autenticación', errorMessage ? errorMessage : 'Ha ocurrido un error' , 'error');
+    // }
   }, [errorMessage]);
   
   return (
