@@ -55,7 +55,7 @@ export const RegisterPage = () => {
 
   useEffect(() => {
     if (errorMessage !== undefined) {
-      // Swal.fire('Error en la autenticación', errorMessage, 'error');
+      Swal.fire('Error en el registro', errorMessage, 'error');
     }
   }, [errorMessage]);
 

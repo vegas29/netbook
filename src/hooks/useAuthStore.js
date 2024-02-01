@@ -18,7 +18,11 @@ export const useAuthStore = () => {
             dispatch( onLogin({ name: data.name, last_name: data.last_name}) );
         } catch (error) {
             console.log({error});
-            dispatch( onLogout('Credenciales incorrectas' ));
+            if(error.message === 'Network Error') {
+                dispatch( onLogout('Ha ocurrido un error, inténtalo más tarde'));
+            } else {
+                dispatch( onLogout('Credenciales incorrectas' ));
+            }
 
             setTimeout(() =>{
                 dispatch(clearErrorMessage());
