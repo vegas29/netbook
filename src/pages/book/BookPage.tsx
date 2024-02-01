@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faShuttleSpace } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import { Footer } from "../../components/Footer";
 import { ItemCard } from "../../components/ItemCard";
@@ -64,7 +64,7 @@ export const BookPage = () => {
                 <TextTitle text="Cien años de soledad" fontSize="text-3xl md:text-5xl" width="mx-auto md:mx-0 lg:w-5/12" fontWeight="font-bold" align={'text-center lg:text-left'}/>
                 <div className="flex flex-col lg:flex-row items-center">
                     <ItemCard isPage={true} url_s={'https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg'}/>
-                    <TextPage author={'Gabriel García'} date={'10 de noviembre de 2015'} publisher={'Harper Collis Español'} rating={50}/>
+                    <TextPage author={'Gabriel García'} date={'10 de noviembre de 2015'} publisher={'Harper Collis Español'} rating={2}/>
                 </div>
                 <div className="relative mx-auto w-6/12 sm:w-full">
                     <FontAwesomeIcon className="absolute top-1/4 ml-5" icon={faSearch} color="#675B8C" />

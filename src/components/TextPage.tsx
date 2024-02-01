@@ -27,7 +27,7 @@ export const TextPage = ({author, date, publisher, rating}) => {
             <p className="flex">
                 <span className="font-black">Rating: </span>
                 <ReactStars
-                    value={2}
+                    value={rating}
                     count={5}
                     onChange={ratingChanged}
                     size={24}
