@@ -10,7 +10,7 @@ export const Navbar = () => {
     navigate('/login');
   }
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center gap-10 md:justify-between py-10">
+    <div className="flex flex-col lg:flex-row justify-center items-center gap-10 md:justify-between py-10">
       <p className="text-white text-2xl font-bold">Smart Library<span className="text-[#AD6BF1]">.</span></p>
       
       <div className="flex gap-10 text-white bg-[#432b84] p-3 rounded-xl">

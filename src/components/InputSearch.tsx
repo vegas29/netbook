@@ -20,7 +20,7 @@ export const InputSearch = () => {
         searchQuery: q,
     });
 
-    const booksFiltered = [
+    const filteredBooks = [
         {
           "isbn": "123",
           "book_title": "Cien años de soledad",
@@ -140,9 +140,9 @@ export const InputSearch = () => {
                 />
             </form>
 
-            <Results q={q} dataLength={booksFiltered.length} />
+            <Results q={q} dataLength={filteredBooks.length} />
 
-            <ItemsList books={booksFiltered} />
+            <ItemsList books={filteredBooks} />
         </>
     )
 }
