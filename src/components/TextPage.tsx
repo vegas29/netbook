@@ -28,6 +28,7 @@ export const TextPage = ({author, date, publisher, rating}) => {
                 <span className="font-black">Rating: </span>
                 <ReactStars
                     value={rating}
+                    isHalf={true}
                     count={5}
                     onChange={ratingChanged}
                     size={24}

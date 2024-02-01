@@ -33,9 +33,10 @@ export const useAuthStore = () => {
 
         try {
             const { data } = await smartLibraryApi.post('/user/create', { name, lastname, email, password });
+            console.log('data', data)
             // localStorage.setItem('token', data.token);
             // localStorage.setItem('token-init-date', new Date().getTime());
-            dispatch( onLogin({ name: data.name, uid: data.uid}) );
+            // dispatch( onLogin({ name: data.name, uid: data.uid}) );
         } catch (error) {
             console.log({error});
             dispatch( onLogout(error?.response?.data?.msg || 'Error'));
