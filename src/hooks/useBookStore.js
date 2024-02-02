@@ -49,9 +49,9 @@ export const useBookStore = () => {
         }
     }
 
-    const startLoadingRatingByUserId= async({isbn = '', userId = ''}) => {
+    const startLoadingRatingByUserId= async({isbn = ''}) => {
         try {
-            const { data }  = await smartLibraryApi.post(`/library/get/rating/user`, {isbn, id_user: userId });
+            const { data }  = await smartLibraryApi.get(`/library/get/book/rating/?isbn=${isbn}`);
             dispatch(onLoadRatingByIsbn(data));
         } catch (error) {
             console.log('Error solicitando el rating por usuario');
@@ -59,11 +59,12 @@ export const useBookStore = () => {
         }
     }
 
-    const startSendRatingByUserId= async({id_rating}) => {
+    const startSendRatingByUserId= async({id_user, isbn, newRating}) => {
         try {
-            const { data }  = await smartLibraryApi.post(`/library/update/rating/${id_rating}*`);
-            console.log('data rating', data)
-            dispatch(onLoadRatingByIsbn(data));
+            const { status }  = await smartLibraryApi.post(`/library/create/rating/`, {id_rating: 0, isbn, id_user: Number(id_user), user_rating: Math.round(Number(newRating))});
+            if (status === 200 || status === 202) {
+                return true;
+            }
         } catch (error) {
             console.log('Error actualizando el rating por usuario');
             console.log(error);

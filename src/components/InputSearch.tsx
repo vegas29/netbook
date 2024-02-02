@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useLocation, useNavigate } from "react-router-dom";
 import queryString from 'query-string';
 import { useForm } from "../hooks/";
@@ -7,12 +8,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Results } from "./Results";
 import { ItemsList } from "./ItemsList";
+import { useSelector } from "react-redux";
+import { Loader } from "../ui/components/Loader";
 
 export const InputSearch = ({books}) => {
 
     const location = useLocation();
     const navigate = useNavigate();
+
     const { startLoadingBooksByName } = useBookStore();
+    const { isLoadingBooks } = useSelector((state:any) => state.book);
 
     const {q = ''} = queryString.parse(location.search);
     
@@ -60,15 +65,20 @@ export const InputSearch = ({books}) => {
                 />
             </form>
 
-           {books.length > 0 ? (
-                <>
-                    <Results q={q} dataLength={books.length} />
-                    <ItemsList books={books} />
-                </>
-                ) : (
-                    <p className="text-center text-lg lg:text-xl text-white py-20">There aren't books with {searchQuery}</p>
-                )
-           }
+            {isLoadingBooks ? (
+                <Loader/>
+            ) : (
+                books.length > 0 ? (
+                    <>
+                        <Results q={q} dataLength={books.length} />
+                        <ItemsList books={books} />
+                    </>
+                    ) : (
+                        <p className="text-center text-lg lg:text-xl text-white py-20">There aren't books with {searchQuery}</p>
+                    )
+                
+            )}
+
 
         </>
     )

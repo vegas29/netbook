@@ -2,8 +2,7 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { useAuthStore } from '../../hooks/';
-import { useBookStore } from '../../hooks/';
+import { useAuthStore, useBookStore } from '../../hooks/';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
@@ -32,17 +31,17 @@ export const BookPage = () => {
     useEffect(() => {
         startLoadingBooksByIsbn({isbn});
         startLoadingRecommendationByUserId({userId: user.id ? user.id : localUserId});
-        startLoadingRatingByUserId({isbn, userId:  user.id ? user.id : localUserId});
-    }, [isbn]);
+        startLoadingRatingByUserId({isbn});
+    }, [isbn, ratingByIsbn]);
 
     return (
         <Background>
             <LayoutContainer>
                 <Navbar user={user} />
-                <TextTitle text={activeBook?.book_title} fontSize="text-3xl md:text-5xl" width="mx-auto md:mx-0 lg:w-5/12" fontWeight="font-bold" align={'text-center lg:text-left'}/>
-                <div className="flex flex-col lg:flex-row items-center">
+                <TextTitle text={activeBook?.book_title} fontSize="text-3xl md:text-5xl" width="mx-auto mx-20 xl:mx-0 lg:w-5/12" fontWeight="font-bold" align={'text-center lg:text-left'}/>
+                <div className="flex flex-col lg:flex-row items-center mx-20 xl:mx-0">
                     <ItemCard isbn={isbn} isPage={true} url_l={activeBook?.url_l}/>
-                    <TextPage author={activeBook?.book_author} date={activeBook?.year_publication} publisher={activeBook?.publisher} rating={ratingByIsbn?.user_rating / 2}/>
+                    <TextPage author={activeBook?.book_author} date={activeBook?.year_publication} publisher={activeBook?.publisher} rating={ratingByIsbn}/>
                 </div>
                 <div className="relative mx-auto w-6/12 sm:w-full">
                     <FontAwesomeIcon className="absolute top-1/4 ml-5" icon={faSearch} color="#675B8C" />
