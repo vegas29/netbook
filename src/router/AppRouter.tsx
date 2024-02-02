@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useAuthStore } from "../hooks";
 import { LoginPage } from '../pages/auth/LoginPage';
@@ -8,9 +9,11 @@ import { BookPage } from '../pages/book/BookPage';
 
 export const AppRouter = () => {
 
-    const { status, 
-        // checkAuthToken
-    } = useAuthStore();
+    const { status, checkAuthToken } = useAuthStore();
+    
+    useEffect(() => {
+        checkAuthToken();
+    }, []);
 
     if (status === 'checking') {
         return (
@@ -31,8 +34,8 @@ export const AppRouter = () => {
                     )
                     :  (
                         <>      
-                            <Route path="/" element={<HomePage/>} />                  
-                            <Route path="/*" element={<Navigate to="/"/>} />
+                            <Route path="/home" element={<HomePage/>} />                  
+                            <Route path="/*" element={<Navigate to="/home"/>} />
                             <Route path="/book/:bookId" element={<BookPage/>} />    
                         </>
                     )

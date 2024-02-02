@@ -13,8 +13,9 @@ export const useAuthStore = () => {
 
         try {
             const { status, data } = await smartLibraryApi.post('/security/login', { email, password });
-            // localStorage.setItem('token', data.token);
-            // localStorage.setItem('token-init-date', new Date().getTime());
+            const { token } = data;
+            localStorage.setItem('token', token.access_token);
+            localStorage.setItem('token-expire-date', token.expire_date);
             if ((status === 200 || status === 202)){
                 dispatch( onLogin({ name: data.name, last_name: data.last_name}) );
             }
@@ -43,9 +44,8 @@ export const useAuthStore = () => {
         try {
             const { status, data} = await smartLibraryApi.post('/user/create', { id: 0, type: 0, name, last_name, email, password, age: 0, active: true });
             if ((status === 200 || status === 202) && data.message === "User created successfully") {
-                // localStorage.setItem('token', data.token);
-                // localStorage.setItem('token-init-date', new Date().getTime());
-                dispatch( onLogin({ name, last_name}));
+                startLogin({email, password});
+                // dispatch( onLogin({ name, last_name}));
             }
         } catch (error) {
             console.log({error});
@@ -64,19 +64,13 @@ export const useAuthStore = () => {
 
     const checkAuthToken = async() => {
 
-        // const token = localStorage.getItem('token');
-        // if (!token) return dispatch( onLogout() );
+        const token = localStorage.getItem('token');
+        const expire_date = localStorage.getItem('token-expire-date');
+        const currentDate = new Date().toUTCString();
 
-        // try {
-        //     const { data } = await smartLibraryApi.get('/auth/renew');
-        //     localStorage.setItem('token', data.token);
-        //     localStorage.setItem('token-init-date', new Date().getTime());
-        //     dispatch( onLogin({ name: data.name, uid: data.uid}) );
-        // } catch (error) {
-        //     console.log({error});
-        //     localStorage.clear();
-        //     dispatch( onLogout() );
-        // }
+        if (!token) return dispatch( onLogout() );
+        if(currentDate <= expire_date) return dispatch( onLogout() );
+
     }
     
 

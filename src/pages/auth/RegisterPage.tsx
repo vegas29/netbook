@@ -54,7 +54,7 @@ export const RegisterPage = () => {
   }
 
   useEffect(() => {
-    if (errorMessage !== null) {
+    if (errorMessage) {
       Swal.fire('Error en el registro', errorMessage ? errorMessage : 'Ha ocurrido un error', 'error');
     }
   }, [errorMessage]);

@@ -35,7 +35,6 @@ export const LoginPage = () => {
       return;
     }
 
-
     const hashPassword = await hashStringToSHA256(password);
 
     await startLogin({email, password: hashPassword});
@@ -43,7 +42,7 @@ export const LoginPage = () => {
   }
 
   useEffect(() => {
-    if (errorMessage !== null) {
+    if (errorMessage) {
       Swal.fire('Error en la autenticación', errorMessage ? errorMessage : 'Ha ocurrido un error' , 'error');
     }
   }, [errorMessage]);

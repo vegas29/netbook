@@ -11,9 +11,18 @@ export const useBookStore = () => {
 
     const startLoadingBooks = async({offset = 0, limit = 10}) => {
         try {
-            const { data } = await smartLibraryApi.get(`/library/get/${offset}/${limit}`,);
-            console.log('data', data);
-            dispatch(onLoadBooks(data.book));
+            const { data } = await smartLibraryApi.get(`/library/get/?offset=${offset}&limit=${limit}`,);
+            dispatch(onLoadBooks(data));
+        } catch (error) {
+            console.log('Error cargando libros');
+            console.log(error);
+        }
+    }
+
+    const startLoadingBooksByName = async({searchQuery = '', offset = 0, limit = 10}) => {
+        try {
+            const { data }  = await smartLibraryApi.post(`/library/get/book/search/title?title=${searchQuery}&offset=${offset}&limit=${limit}`);
+            dispatch(onLoadBooks(data));
         } catch (error) {
             console.log('Error cargando libros');
             console.log(error);
@@ -26,6 +35,7 @@ export const useBookStore = () => {
 
         //Methods
         setActiveBook,
-        startLoadingBooks
+        startLoadingBooks,
+        startLoadingBooksByName
     }
 }
