@@ -21,6 +21,9 @@ import { TextPage } from '../../components/TextPage';
 export const BookPage = () => {
 
     const { user } = useAuthStore();
+    const localUserId = localStorage.getItem('id');
+
+    console.log('userId', localUserId)
 
     const { isbn } = useParams();
 
@@ -30,53 +33,9 @@ export const BookPage = () => {
 
     useEffect(() => {
         startLoadingBooksByIsbn({isbn});
-        startLoadingRecommendationByUserId({userId: user.id});
-        startLoadingRatingByUserId({isbn, userId: user.id});
+        startLoadingRecommendationByUserId({userId: user.id ? user.id : localUserId});
+        startLoadingRatingByUserId({isbn, userId:  user.id ? user.id : localUserId});
     }, []);
-
-    const relatedBooks = [
-        {
-          "isbn": "123",
-          "book_title": "Cien años de soledad",
-          "book_author": "Gabriel Garcia Marquez",
-          "year_publication": 2014,
-          "publisher": "Harper Collins Español",
-          "url_s": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
-          "url_m": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
-          "url_l": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg"
-        },
-        {
-            "isbn": "123",
-            "book_title": "Cien años de soledad",
-            "book_author": "Gabriel Garcia Marquez",
-            "year_publication": 2014,
-            "publisher": "Harper Collins Español",
-            "url_s": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
-            "url_m": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
-            "url_l": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg"
-        },
-        {
-            "isbn": "123",
-            "book_title": "Cien años de soledad",
-            "book_author": "Gabriel Garcia Marquez",
-            "year_publication": 2014,
-            "publisher": "Harper Collins Español",
-            "url_s": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
-            "url_m": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
-            "url_l": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg"
-        },
-        {
-            "isbn": "123",
-            "book_title": "Cien años de soledad",
-            "book_author": "Gabriel Garcia Marquez",
-            "year_publication": 2014,
-            "publisher": "Harper Collins Español",
-            "url_s": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
-            "url_m": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg",
-            "url_l": "https://images.cdn2.buscalibre.com/fit-in/360x360/52/6b/526bb938f7613f31e3e42272df5463e1.jpg"
-        }               
-    ];
-
 
     return (
         <Background>
@@ -91,7 +50,7 @@ export const BookPage = () => {
                     <FontAwesomeIcon className="absolute top-1/4 ml-5" icon={faSearch} color="#675B8C" />
                     <h2 className="font-bold ml-12 mt-10 text-lg md:text-xl text-[#675B8C] uppercase">Recommended for you</h2>
                 </div>
-                <ItemsList books={relatedBooks}/>
+                <ItemsList books={recommendations}/>
                 <Footer/>
             </LayoutContainer>
         </Background>
