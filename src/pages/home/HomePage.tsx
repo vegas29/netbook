@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { LayoutContainer } from "../../layouts/LayoutContainer";
@@ -15,7 +16,7 @@ export const HomePage = () => {
     const { user } = useAuthStore();
     const { startLoadingBooks } = useBookStore();
     
-    const { books } = useSelector(state => state.book);
+    const { books } = useSelector((state:any) => state.book);
 
     const [offset, setOffset] = useState(0);
     const [limit, setLimit] = useState(10);

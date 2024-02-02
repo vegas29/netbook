@@ -1,5 +1,3 @@
-// import { heroes } from "../data/heroes";
-
 export const getBooksByName = (name = '') => {
 
     const books = [];

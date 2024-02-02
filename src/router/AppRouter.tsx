@@ -10,7 +10,7 @@ import { BookPage } from '../pages/book/BookPage';
 export const AppRouter = () => {
 
     const { status, checkAuthToken } = useAuthStore();
-    
+
     useEffect(() => {
         checkAuthToken();
     }, []);
