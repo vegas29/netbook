@@ -17,7 +17,7 @@ export const useAuthStore = () => {
             localStorage.setItem('token', token.access_token);
             localStorage.setItem('token-expire-date', token.expire_date);
             if ((status === 200 || status === 202)){
-                dispatch( onLogin({ name: data.name, last_name: data.last_name}) );
+                dispatch( onLogin({ name: data.name, last_name: data.last_name, id: data.id_user}) );
             }
         } catch (error) {
             console.log({error});

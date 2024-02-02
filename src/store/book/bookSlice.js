@@ -5,7 +5,9 @@ export const bookSlice = createSlice({
     initialState: {
         isLoadingBooks: true,
         books: [],
-        activeBook: null
+        activeBook: null,
+        recommendations: [],
+        ratingByIsbn: null,
     },
     reducers: {
         onSetActiveBook: ( state, { payload }) => {
@@ -14,11 +16,20 @@ export const bookSlice = createSlice({
         onLoadBooks: (state, { payload = [] }) => {
             state.isLoadingBooks = false;
             state.books = payload;
-        }
+        },
+        onLoadRecommendations: (state, { payload = [] }) => {
+            state.isLoadingBooks = false;
+            state.recommendations = payload;
+        },
+        onLoadRatingByIsbn: ( state, { payload }) => {
+            state.ratingByIsbn = payload;
+        },
     }
 });
 
 export const { 
     onSetActiveBook, 
-    onLoadBooks
+    onLoadBooks,
+    onLoadRecommendations,
+    onLoadRatingByIsbn
 } = bookSlice.actions;

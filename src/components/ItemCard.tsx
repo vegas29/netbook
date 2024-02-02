@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
-export const ItemCard = ({book_title = 'title', year_publication = '1999', url_l = '', isPage = false}) => {
+export const ItemCard = ({book_title = 'title', year_publication = '1999', url_l = '', isPage = false, isbn}) => {
 
     return (
         <Link 
-            to={`/book/${book_title}`}
+            to={`/book/${isbn}`}
             className="overflow-hidden rounded-xl"
         >   
             {isPage ? (

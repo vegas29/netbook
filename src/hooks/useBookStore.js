@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import smartLibraryApi from "../api/smartLibraryApi";
-import { onLoadBooks, onSetActiveBook } from "../store";
+import { onLoadBooks, onSetActiveBook, onLoadRecommendations, onLoadRatingByIsbn } from "../store";
 
 export const useBookStore = () => {
     const dispatch = useDispatch();
@@ -29,6 +29,50 @@ export const useBookStore = () => {
         }
     }
 
+    const startLoadingBooksByIsbn = async({isbn = ''}) => {
+        try {
+            const { data }  = await smartLibraryApi.get(`/library/get/${isbn}`);
+            dispatch(onSetActiveBook(data));
+        } catch (error) {
+            console.log('Error cargando libro');
+            console.log(error);
+        }
+    }
+
+    const startLoadingRecommendationByUserId= async({userId = ''}) => {
+        console.log('user', userId)
+        try {
+            const { data }  = await smartLibraryApi.post(`/recomendation/get/`, {user_id: userId, date: new Date('2024-01-28')});
+            console.log('data', data)
+            dispatch(onLoadRecommendations(data));
+        } catch (error) {
+            console.log('Error solicitando la recomendación');
+            console.log(error);
+        }
+    }
+
+    const startLoadingRatingByUserId= async({isbn = '', userId = ''}) => {
+        try {
+            const { data }  = await smartLibraryApi.post(`/library/get/rating/user`, {isbn, id_user: userId });
+            console.log('data rating', data)
+            dispatch(onLoadRatingByIsbn(data));
+        } catch (error) {
+            console.log('Error solicitando el rating por usuario');
+            console.log(error);
+        }
+    }
+
+    const startSendRatingByUserId= async({isbn = '', userId = ''}) => {
+        try {
+            const { data }  = await smartLibraryApi.post(`/library/get/rating/user`, {isbn, id_user: userId });
+            console.log('data rating', data)
+            dispatch(onLoadRatingByIsbn(data));
+        } catch (error) {
+            console.log('Error solicitando el rating por usuario');
+            console.log(error);
+        }
+    }
+
 
     return {
         //Properties
@@ -36,6 +80,10 @@ export const useBookStore = () => {
         //Methods
         setActiveBook,
         startLoadingBooks,
-        startLoadingBooksByName
+        startLoadingBooksByName,
+        startLoadingBooksByIsbn,
+        startLoadingRecommendationByUserId,
+        startLoadingRatingByUserId,
+        startSendRatingByUserId
     }
 }
