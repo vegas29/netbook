@@ -29,7 +29,9 @@ export const BookPage = () => {
 
     const {  startLoadingBooksByIsbn, startLoadingRecommendationByUserId, startLoadingRatingByUserId } = useBookStore();
         
-    const { activeBook, recommendations, ratingByIsbn } = useSelector((state:any) => state.book);
+    const { activeBook, recommendations, 
+        // ratingByIsbn
+    } = useSelector((state:any) => state.book);
 
     useEffect(() => {
         startLoadingBooksByIsbn({isbn});
