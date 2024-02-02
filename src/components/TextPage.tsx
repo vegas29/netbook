@@ -3,9 +3,6 @@ import ReactStars from "react-rating-stars-component";
 import { useSelector } from "react-redux";
 import { Loader } from "../ui/components/Loader";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStarHalfAlt, faStar } from '@fortawesome/free-solid-svg-icons';
-
 export const TextPage = ({author, date, publisher, rating}) => {
 
     const { isLoadingBooks } = useSelector((state:any) => state.book);
