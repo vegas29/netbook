@@ -12,21 +12,29 @@ export const useAuthStore = () => {
         dispatch( onChecking() );
 
         try {
-            const { data } = await smartLibraryApi.post('/security/login', { email, password });
+            const { status, data } = await smartLibraryApi.post('/security/login', { email, password });
             // localStorage.setItem('token', data.token);
             // localStorage.setItem('token-init-date', new Date().getTime());
-            dispatch( onLogin({ name: data.name, last_name: data.last_name}) );
+            if ((status === 200 || status === 202)){
+                dispatch( onLogin({ name: data.name, last_name: data.last_name}) );
+            }
         } catch (error) {
             console.log({error});
             if(error.message === 'Network Error') {
                 dispatch( onLogout('Ha ocurrido un error, inténtalo más tarde'));
+                
+                setTimeout(() =>{
+                    dispatch(clearErrorMessage());
+                }, 1000);
+                return;
             } else {
                 dispatch( onLogout('Credenciales incorrectas' ));
+                
+                setTimeout(() =>{
+                    dispatch(clearErrorMessage());
+                }, 1000);
+                return;
             }
-
-            setTimeout(() =>{
-                dispatch(clearErrorMessage());
-            }, 1000);
         }
     }
 

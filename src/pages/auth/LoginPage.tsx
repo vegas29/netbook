@@ -6,8 +6,6 @@ import Swal from "sweetalert2";
 
 export const LoginPage = () => {
 
-  // const navigate = useNavigate();
-
   const { startLogin, errorMessage } = useAuthStore();
 
   const [formValues, handleInputChange] = useForm({
@@ -37,13 +35,13 @@ export const LoginPage = () => {
     }
 
     startLogin({email, password});
+
   }
 
   useEffect(() => {
-    // if (errorMessage !== undefined) {
-    //   console.log('errorMessage', errorMessage)
-    //   Swal.fire('Error en la autenticación', errorMessage ? errorMessage : 'Ha ocurrido un error' , 'error');
-    // }
+    if (errorMessage !== null) {
+      Swal.fire('Error en la autenticación', errorMessage ? errorMessage : 'Ha ocurrido un error' , 'error');
+    }
   }, [errorMessage]);
   
   return (
