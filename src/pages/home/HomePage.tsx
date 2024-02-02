@@ -44,7 +44,7 @@ export const HomePage = () => {
                 <Navbar user={user}/>
                 <TextTitle text="What would you like to read tonight" fontSize="text-3xl md:text-4xl" width="md:w-4/12 md:mx-auto" fontWeight="font-bold"/>
                 <InputSearch books={!firtsArray ? books :  arrayBooks}/>
-                {books.length > 0 && (
+                {books.length > 0 &&  (
                     <ButtonGetMore onClick={nextPage}/>
                 )}
                 <Footer/>

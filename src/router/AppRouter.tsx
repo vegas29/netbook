@@ -36,7 +36,7 @@ export const AppRouter = () => {
                         <>      
                             <Route path="/home" element={<HomePage/>} />                  
                             <Route path="/*" element={<Navigate to="/home"/>} />
-                            <Route path="/book/:bookId" element={<BookPage/>} />    
+                            <Route path="/book/:sbnId" element={<BookPage/>} />    
                         </>
                     )
             }

@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import queryString from 'query-string';
 import { useForm } from "../hooks/";
 
@@ -11,6 +11,7 @@ import { ItemsList } from "./ItemsList";
 export const InputSearch = ({books}) => {
 
     const location = useLocation();
+    const navigate = useNavigate();
     const { startLoadingBooksByName } = useBookStore();
 
     const {q = ''} = queryString.parse(location.search);
@@ -27,6 +28,14 @@ export const InputSearch = ({books}) => {
         const limit = 10;
 
         startLoadingBooksByName({searchQuery, offset, limit});
+
+            
+        if(searchQuery.trim() === ''){
+            alert('The name of books is required');
+            return;
+        }
+      
+        navigate(`?q=${searchQuery}`);
     }
     
 
