@@ -23,7 +23,7 @@ export const ItemsList = ({books}) => {
                     }
                 </div>
             ) : (
-                <p className="text-center text-lg lg:text-xl text-white">There aren't books</p>
+                <p className="text-center text-lg lg:text-xl text-white">No books to recommend</p>
             )
         )
     )
