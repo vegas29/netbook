@@ -43,11 +43,17 @@ export const BookPage = () => {
                     <ItemCard isbn={isbn} isPage={true} url_l={activeBook?.url_l}/>
                     <TextPage author={activeBook?.book_author} date={activeBook?.year_publication} publisher={activeBook?.publisher} rating={ratingByIsbn}/>
                 </div>
-                <div className="relative mx-auto w-6/12 sm:w-full">
-                    <FontAwesomeIcon className="absolute top-1/4 ml-5" icon={faSearch} color="#675B8C" />
-                    <h2 className="font-bold ml-12 mt-10 text-lg md:text-xl text-[#675B8C] uppercase">Recommended for you</h2>
-                </div>
-                <ItemsList books={recommendations}/>
+                {recommendations.length > 0 ? (
+                    <>                    
+                        <div className="relative mx-auto w-6/12 sm:w-full">
+                            <FontAwesomeIcon className="absolute top-1/4 ml-5" icon={faSearch} color="#675B8C" />
+                            <h2 className="font-bold ml-12 mt-10 text-lg md:text-xl text-[#675B8C] uppercase">Recommended for you</h2>
+                        </div>
+                        <ItemsList books={recommendations}/>
+                    </>
+                ) : (
+                    <p className="text-center text-lg lg:text-xl text-white">There aren't books</p>
+                )}
                 <Footer/>
             </LayoutContainer>
         </Background>
