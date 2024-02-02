@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AuthLayout } from "../../layouts/AuthLayout";
 import { useAuthStore, useForm } from "../../hooks/";
+import { hashStringToSHA256 } from "../../helpers"
 import Swal from "sweetalert2";
 
 export const LoginPage = () => {
@@ -15,7 +16,7 @@ export const LoginPage = () => {
 
   const {email, password} = formValues;
 
-  const handleLogin = (e) =>{
+  const handleLogin = async (e) =>{
     e.preventDefault();
 
     if([email, password].includes('')) {
@@ -34,7 +35,10 @@ export const LoginPage = () => {
       return;
     }
 
-    startLogin({email, password});
+
+    const hashPassword = await hashStringToSHA256(password);
+
+    await startLogin({email, password: hashPassword});
 
   }
 
