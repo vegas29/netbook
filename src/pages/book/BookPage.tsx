@@ -27,15 +27,13 @@ export const BookPage = () => {
 
     const {  startLoadingBooksByIsbn, startLoadingRecommendationByUserId, startLoadingRatingByUserId } = useBookStore();
         
-    const { activeBook, recommendations, 
-        // ratingByIsbn
-    } = useSelector((state:any) => state.book);
+    const { activeBook, recommendations, ratingByIsbn } = useSelector((state:any) => state.book);
 
     useEffect(() => {
         startLoadingBooksByIsbn({isbn});
         startLoadingRecommendationByUserId({userId: user.id ? user.id : localUserId});
         startLoadingRatingByUserId({isbn, userId:  user.id ? user.id : localUserId});
-    }, []);
+    }, [isbn]);
 
     return (
         <Background>
@@ -44,7 +42,7 @@ export const BookPage = () => {
                 <TextTitle text={activeBook?.book_title} fontSize="text-3xl md:text-5xl" width="mx-auto md:mx-0 lg:w-5/12" fontWeight="font-bold" align={'text-center lg:text-left'}/>
                 <div className="flex flex-col lg:flex-row items-center">
                     <ItemCard isbn={isbn} isPage={true} url_l={activeBook?.url_l}/>
-                    <TextPage author={activeBook?.book_author} date={activeBook?.year_publication} publisher={activeBook?.publisher} rating={2}/>
+                    <TextPage author={activeBook?.book_author} date={activeBook?.year_publication} publisher={activeBook?.publisher} rating={ratingByIsbn?.user_rating / 2}/>
                 </div>
                 <div className="relative mx-auto w-6/12 sm:w-full">
                     <FontAwesomeIcon className="absolute top-1/4 ml-5" icon={faSearch} color="#675B8C" />
