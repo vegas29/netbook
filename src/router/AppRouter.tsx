@@ -11,6 +11,8 @@ export const AppRouter = () => {
 
     const { status, checkAuthToken } = useAuthStore();
 
+    const token = localStorage.getItem('token');
+
     useEffect(() => {
         checkAuthToken();
     }, []);
@@ -24,7 +26,7 @@ export const AppRouter = () => {
     return (
         <Routes>
             {
-                (status === 'not-authenticated')
+                (status === 'not-authenticated' && !token )
                     ? (
                         <>
                             <Route path="/" element={<LoginPage/>} />

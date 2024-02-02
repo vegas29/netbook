@@ -12,6 +12,8 @@ export const Navbar = ({user}) => {
 
   const { startLogout } = useAuthStore();
 
+  const localUserName = localStorage.getItem('name') + ' ' + localStorage.getItem('last_name');
+
   const goBack = () => {
     navigate(-1);
   }
@@ -31,7 +33,7 @@ export const Navbar = ({user}) => {
 
       
       <div className="flex gap-10 text-white bg-[#432b84] p-3 rounded-xl">
-        <p className="font-medium">Hi, {user.name + ' ' + user.last_name} </p>
+        <p className="font-medium">Hi, {user.name ? user.name + ' ' + user.last_name : localUserName} </p>
         <FontAwesomeIcon className="text-2xl cursor-pointer" icon={faRightToBracket} onClick={startLogout} />
       </div>
     </div>

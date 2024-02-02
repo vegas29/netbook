@@ -28,7 +28,6 @@ export const RegisterPage = () => {
     }
 
     if (!email.includes('@')) {
-      console.log(email.includes('@'), email)
       Swal.fire({
         icon: "error",
         title: "Oops...",
