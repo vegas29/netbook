@@ -10,13 +10,14 @@ import { TextTitle } from "../../components/TextTitle";
 import { InputSearch } from "../../components/InputSearch";
 import { Footer } from "../../components/Footer";
 import { ButtonGetMore } from "../../components/ButtonGetMore";
+import { Loader } from "../../ui/components/Loader";
 
 export const HomePage = () => {
 
     const { user } = useAuthStore();
     const { startLoadingBooks } = useBookStore();
     
-    const { books } = useSelector((state:any) => state.book);
+    const { books, isLoadingBooks } = useSelector((state:any) => state.book);
 
     const [offset, setOffset] = useState(0);
     const [limit, setLimit] = useState(10);
@@ -43,9 +44,15 @@ export const HomePage = () => {
             <LayoutContainer>
                 <Navbar user={user}/>
                 <TextTitle text="What would you like to read tonight" fontSize="text-3xl md:text-4xl" width="md:w-4/12 md:mx-auto" fontWeight="font-bold"/>
-                <InputSearch books={!firtsArray ? books :  arrayBooks}/>
-                {books.length > 0 &&  (
-                    <ButtonGetMore onClick={nextPage}/>
+                {isLoadingBooks ? (
+                    <Loader/>
+                ) : (            
+                    <>
+                        <InputSearch books={!firtsArray ? books :  arrayBooks}/>
+                        {books.length > 0 &&  (
+                            <ButtonGetMore onClick={nextPage}/>
+                        )}
+                    </>        
                 )}
                 <Footer/>
             </LayoutContainer>

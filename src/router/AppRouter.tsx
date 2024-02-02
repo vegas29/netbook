@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { useAuthStore } from "../hooks";
 import { LoginPage } from '../pages/auth/LoginPage';
 import { RegisterPage } from '../pages/auth/RegisterPage';
-import { Loader } from '../ui/components/Loader';
+import { LoaderPage } from '../ui/components/LoaderPage';
 import { HomePage } from '../pages/home/HomePage';
 import { BookPage } from '../pages/book/BookPage';
 
@@ -19,7 +19,7 @@ export const AppRouter = () => {
 
     if (status === 'checking') {
         return (
-            <Loader />
+            <LoaderPage />
         )
     }
 

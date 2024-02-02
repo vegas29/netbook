@@ -23,8 +23,6 @@ export const BookPage = () => {
     const { user } = useAuthStore();
     const localUserId = localStorage.getItem('id');
 
-    console.log('userId', localUserId)
-
     const { isbn } = useParams();
 
     const {  startLoadingBooksByIsbn, startLoadingRecommendationByUserId, startLoadingRatingByUserId } = useBookStore();

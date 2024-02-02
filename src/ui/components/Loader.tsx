@@ -16,14 +16,9 @@ export const Loader = () => {
 
     return (
         <div
-            className="flex flex-col items-center justify-center min-h-[100vh] bg-white p-4"
+            className="d-flex flex-column justify-content-center align-items-center" 
         >
-            <div
-                className="d-flex flex-column justify-content-center align-items-center" 
-            >
-                {View}
-                <p className="text-center">Loading...</p>
-            </div>
-        </div>        
+            {View}
+        </div>     
     )
 }

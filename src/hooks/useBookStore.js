@@ -40,10 +40,8 @@ export const useBookStore = () => {
     }
 
     const startLoadingRecommendationByUserId= async({userId = ''}) => {
-        console.log('suuserIdb', userId)
         try {
             const { data }  = await smartLibraryApi.post(`/recomendation/get/`, {user_id: userId, date: new Date('2024-01-28')});
-            console.log('data', data)
             dispatch(onLoadRecommendations(data));
         } catch (error) {
             console.log('Error solicitando la recomendación');

@@ -1,4 +1,7 @@
+import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css';
 import { Link } from "react-router-dom";
+import { Loader } from "../ui/components/Loader";
 
 export const ItemCard = ({book_title = 'title', year_publication = '1999', url_l = '', isPage = false, isbn}) => {
 
@@ -8,9 +11,17 @@ export const ItemCard = ({book_title = 'title', year_publication = '1999', url_l
             className="overflow-hidden rounded-xl"
         >   
             {isPage ? (
-                <img src={url_l} alt={book_title} className={`h-[480px] rounded-xl cursor-pointer transform transition-transform hover:scale-110 hover:h-[480px] mx-auto sm:mx-0 object-cover pb-12`} />
+                url_l !== '' || url_l  ? (
+                    <img src={url_l} alt={book_title} className={`h-[480px] rounded-xl cursor-pointer transform transition-transform hover:scale-110 hover:h-[480px] mx-auto sm:mx-0 object-cover pb-12`} />
+                ) : (
+                    <Loader />
+                )
             ) : (
-                <img src={url_l} alt={book_title} className={`h-[400px] rounded-xl cursor-pointer transform transition-transform hover:scale-110 hover:h-[400px] mx-auto sm:mx-0 object-cover`} />
+                url_l !== '' || url_l  ? (
+                    <img src={url_l} alt={book_title} className={`h-[400px] rounded-xl cursor-pointer transform transition-transform hover:scale-110 hover:h-[400px] mx-auto sm:mx-0 object-cover`} />
+                ) : (
+                    <Loader/>
+                )
             )}
             {!isPage && (
                 <div className="text-center sm:text-left">                
